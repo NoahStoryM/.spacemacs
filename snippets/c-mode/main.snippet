@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: main part of C program
+# key: main.
+# --
+#include <stdio.h>
+${1:#include <stdlib.h>
+}${2:#include <stdbool.h>
+}${3:#include <string.h>
+}${4:#include <math.h>
+}$5
+
+int main(${6:int argc, char *argv[]})
+{
+    $0
+
+
+    return 0;
+} // close main

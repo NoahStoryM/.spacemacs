@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: main part of Python program
+# key: main.
+# --
+${1:#! /usr/bin/env ${2:python3}
+}${3:# -*- ${4:coding: ${5:utf-8}} -*-
+
+}import sys
+${6:import os
+}${7:import re
+}${8:import sympy as sy
+}${9:import scipy as sp
+}${10:import numpy as np
+}${11:import pandas as pd
+}${12:import networkx as nx
+}${13:import matplotlib as mpl
+}${14:import matplotlib.pyplot as plt
+}${15:from mpl_toolkits.mplot3d import Axes3D
+}$16
+
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+
+
+    ${0:pass}
+
+
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

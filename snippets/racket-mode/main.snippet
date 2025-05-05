@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: main module
+# key: main.
+# --
+${1:(: main (→* () ((Vectorof String)) Any))
+}(define (main [argv (current-command-line-arguments)])
+  (define argc (vector-length argv))
+  (let/cc return${2: : Any}
+    $0
+    (return${3: #t})))
+(module+ main (call-with-values main exit))

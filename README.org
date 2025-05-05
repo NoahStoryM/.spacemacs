@@ -1,0 +1,15 @@
+* Install
+  You can use my configuration by two steps:
+
+** .spacemacs.d
+   #+begin_src sh
+     git clone -b develop https://github.com/NoahStoryM/.spacemacs.git ~/.spacemacs.d
+   #+end_src
+
+** .emacs.d
+   #+begin_src sh
+     git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
+   #+end_src
+
+* ꧁༺๑ ͜҉๑҉Ƹ̵̡̄Ӝ̵̨̄Ʒ҉๑҉͜ ๑༻꧂
+  Happy Hacking!  <(~︶~)>

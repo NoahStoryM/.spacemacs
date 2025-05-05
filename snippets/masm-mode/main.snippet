@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: main part of masm.
+# key: main.
+# --
+$2 segment
+    assume ${1:cs}: ${2:code}${3:, ss: ${4:stack}${5:, ds: ${6:data}}}
+    $0
+$2 ends
+end
