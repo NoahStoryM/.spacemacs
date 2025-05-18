@@ -11,15 +11,16 @@
 ;;; Code:
 
 (progn ;; Basic
+  (custom-set-variables '(evil-default-state 'custom-normal))
   (delete-selection-mode t)
   (global-font-lock-mode t)
   (global-prettify-symbols-mode t))
 
 (progn ;; Electric pair
-  (electric-pair-mode t)
   (custom-set-variables
    '(electric-pair-delete-adjacent-pairs nil)
-   '(electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)))
+   '(electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
+  (electric-pair-mode t))
 
 (let ;; Theme
     ((theme (when custom-enabled-themes (car custom-enabled-themes))))

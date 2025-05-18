@@ -10,184 +10,11 @@
 
 ;;; Code:
 
-(progn ;; KBD Grf
+(progn ;; Basic
   (keymap-set key-translation-map "C-SPC" "<escape>")
   (keymap-set key-translation-map "C-(" "<escape>")
-  (keymap-set input-decode-map "C-i" "H-i")
-  (dolist (state-map
-           (list evil-motion-state-map
-                 evil-normal-state-map
-                 evil-visual-state-map))
-    (keymap-clear state-map '("" "C-" "H-" "M-" "S-")))
-  (dotimes (i 10)
-    (keymap-set evil-motion-state-map (format "%d" i) 'digit-argument))
-  (dolist
-      (p
-       '(
-         ("`" . evil-use-register)
-
-         ("i" . evil-previous-line)
-         ("j" . evil-backward-char)
-         ("k" . evil-next-line)
-         ("l" . evil-forward-char)
-         ("u" . evil-backward-word-begin)
-         ("o" . evil-forward-word-end)
-         ("U" . evil-backward-WORD-end)
-         ("O" . evil-forward-WORD-begin)
-
-         ("H-i" . evil-scroll-up)
-         ("C-j" . evil-scroll-page-up)
-         ("C-k" . evil-scroll-down)
-         ("C-l" . evil-scroll-page-down)
-         ("C-u" . evil-scroll-line-up)
-         ("C-o" . evil-scroll-line-down)
-
-         ("M-i" . evil-window-up)
-         ("M-j" . evil-window-left)
-         ("M-k" . evil-window-down)
-         ("M-l" . evil-window-right)
-         ("M-u" . evil-window-prev)
-         ("M-o" . evil-window-next)
-
-         ("I" . evil-ex-search-previous)
-         ("J" . evil-ex-search-backward)
-         ("K" . evil-ex-search-next)
-         ("L" . evil-ex-search-forward)
-
-         ("b" . evil-visual-char)
-         ("B" . evil-visual-line)
-         ("C-b" . evil-visual-block)
-
-         ("h" . evil-first-non-blank)
-         (";" . evil-end-of-line)
-
-         ("m" . own/backward-left-bracket)
-         ("," . evil-jump-item)
-         ("." . own/forward-right-bracket)
-
-         ("p" . evil-goto-mark)
-         ("P" . evil-set-marker)
-
-         ("y" . evil-execute-macro)
-         ("Y" . evil-record-macro)
-
-         ("n" . evil-window-middle)
-
-         (":" . evil-ex)
-         ("\\" . hs-toggle-hidin)
-         ("/" . evil-repeat)
-         ))
-    (keymap-set evil-motion-state-map (car p) (cdr p)))
-
-  (evil-add-ijkl-bindings Buffer-menu-mode-map 'motion)
-  (evil-add-ijkl-bindings dictionary-mode-map 'motion)
-  (evil-add-ijkl-bindings Info-mode-map 'normal)
-  (evil-add-ijkl-bindings ert-results-mode-map 'normal)
-  (evil-add-ijkl-bindings ag-mode-map 'motion)
-  (evil-add-ijkl-bindings speedbar-mode-map 'motion
-    "h" 'speedbar-item-info
-    "i" 'speedbar-prev
-    "j" 'backward-char
-    "k" 'speedbar-next
-    "l" 'forward-char)
-
-  (dolist
-      (p
-       '(
-         ("e" . evil-change)
-         ("s" . backward-delete-char)
-         ("d" . evil-delete)
-         ("f" . delete-char)
-         ("w" . backward-kill-word)
-         ("r" . kill-word)
-
-         ("E" . evil-change-line)
-         ("D" . evil-delete-line)
-
-         ("a" . evil-insert)
-         ("g" . evil-append)
-         ("q" . evil-open-below)
-         ("t" . evil-replace)
-
-         ("A" . evil-insert-line)
-         ("G" . evil-append-line)
-         ("Q" . evil-open-above)
-         ("T" . evil-enter-replace-state)
-
-         ("z" . comment-dwim)
-         ("x" . evil-undo)
-         ("c" . evil-redo)
-         ("v" . evil-paste-after)
-         ("V" . evil-paste-before)
-
-         ("Z" . evil-join)
-         ))
-    (keymap-set evil-normal-state-map (car p) (cdr p)))
-
-  (dolist
-      (p
-       `(
-         ("s" . evil-surround-region)
-
-         ("b" . evil-exit-visual-state)
-         ("x" . evil-delete-char)
-         ("X" . evil-delete-backward-char)
-         ("c" . evil-yank)
-         ("C" . evil-yank-line)
-         ))
-    (keymap-set evil-visual-state-map (car p) (cdr p)))
-
-  (require 'paredit)
-  (keymap-set paredit-mode-map "C-d" nil)
-  (keymap-set paredit-mode-map "C-k" nil)
-  (keymap-set paredit-mode-map "M-k" nil)
-  (evil-define-key '(emacs hybrid insert) paredit-mode-map
-    (kbd "C-d") 'paredit-delete-char
-    (kbd "C-k") 'paredit-kill
-    (kbd "M-k") 'paredit-forward-kill-word)
-
-  (evil-define-key 'normal enhanced-evil-paredit-mode-map
-    (kbd "P") nil
-    (kbd "p") nil
-    (kbd "c") nil
-    (kbd "y") nil
-    (kbd "D") nil
-    (kbd "C") nil
-    (kbd "S") nil
-    (kbd "Y") nil
-    (kbd "X") nil
-    (kbd "x") nil
-    (kbd "v") 'enhanced-evil-paredit-paste-after
-    (kbd "V") 'enhanced-evil-paredit-paste-before
-    (kbd "d") 'enhanced-evil-paredit-delete
-    (kbd "D") 'enhanced-evil-paredit-delete-line
-    (kbd "e") 'enhanced-evil-paredit-change
-    (kbd "E") 'enhanced-evil-paredit-change-line)
-
-  (evil-define-key 'visual enhanced-evil-paredit-mode-map
-    (kbd "z") 'paredit-comment-dwim
-    (kbd "x") 'evil-delete-char
-    (kbd "X") 'evil-delete-backward-char
-    (kbd "c") 'enhanced-evil-paredit-yank
-    (kbd "C") 'enhanced-evil-paredit-yank-line)
-
-  (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
-  (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
-
-  (evil-define-key '(visual operator) 'evil-org-mode
-    (kbd "i e") nil
-    (kbd "i E") nil
-    (kbd "i r") nil
-    (kbd "i R") nil
-    (kbd "i")   'evil-previous-line
-    (kbd "h e") 'evil-org-inner-object
-    (kbd "h E") 'evil-org-inner-element
-    (kbd "h r") 'evil-org-inner-greater-element
-    (kbd "h R") 'evil-org-inner-subtree)
-  )
-
-(progn ;; Basic
   (custom-set-variables
+   '(evil-default-state 'custom-normal)
    '(evil-want-C-i-jump nil)
    '(evil-want-C-u-scroll nil)
    '(evil-want-C-d-scroll nil))
@@ -218,6 +45,53 @@
 
 (progn ;; Guix
   (spacemacs/set-leader-keys "g x" 'guix))
+
+(progn ;; Org
+  (evil-define-key '(custom-visual) 'evil-org-mode
+    (kbd "i e") nil
+    (kbd "i E") nil
+    (kbd "i r") nil
+    (kbd "i R") nil
+    (kbd "i")   'evil-previous-line
+    (kbd "h e") 'evil-org-inner-object
+    (kbd "h E") 'evil-org-inner-element
+    (kbd "h r") 'evil-org-inner-greater-element
+    (kbd "h R") 'evil-org-inner-subtree))
+
+(progn ;; Paredit
+  (require 'paredit)
+  (keymap-set paredit-mode-map "C-d" nil)
+  (keymap-set paredit-mode-map "C-k" nil)
+  (keymap-set paredit-mode-map "M-k" nil)
+  (evil-define-key '(emacs hybrid insert) paredit-mode-map
+    (kbd "C-d") 'paredit-delete-char
+    (kbd "C-k") 'paredit-kill
+    (kbd "M-k") 'paredit-forward-kill-word)
+
+  (evil-define-key 'custom-normal enhanced-evil-paredit-mode-map
+    (kbd "P") nil
+    (kbd "p") nil
+    (kbd "c") nil
+    (kbd "y") nil
+    (kbd "D") nil
+    (kbd "C") nil
+    (kbd "S") nil
+    (kbd "Y") nil
+    (kbd "X") nil
+    (kbd "x") nil
+    (kbd "v") 'enhanced-evil-paredit-paste-after
+    (kbd "V") 'enhanced-evil-paredit-paste-before
+    (kbd "d") 'enhanced-evil-paredit-delete
+    (kbd "D") 'enhanced-evil-paredit-delete-line
+    (kbd "e") 'enhanced-evil-paredit-change
+    (kbd "E") 'enhanced-evil-paredit-change-line)
+
+  (evil-define-key 'custom-visual enhanced-evil-paredit-mode-map
+    (kbd "z") 'paredit-comment-dwim
+    (kbd "x") 'evil-delete-char
+    (kbd "X") 'evil-delete-backward-char
+    (kbd "c") 'enhanced-evil-paredit-yank
+    (kbd "C") 'enhanced-evil-paredit-yank-line))
 
 (progn ;; Tab bar
   (dolist (i (number-sequence 1 9))
