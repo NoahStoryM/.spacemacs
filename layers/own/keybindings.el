@@ -76,16 +76,13 @@
          (":" . evil-ex)
          ("\\" . hs-toggle-hidin)
          ("/" . evil-repeat)
-
-         ("M-i" . evil-window-top)
-         ("M-k" . evil-window-bottom)
          ))
     (keymap-set evil-motion-state-map (car p) (cdr p)))
 
   (evil-add-ijkl-bindings Buffer-menu-mode-map 'motion)
   (evil-add-ijkl-bindings dictionary-mode-map 'motion)
+  (evil-add-ijkl-bindings Info-mode-map 'normal)
   (evil-add-ijkl-bindings ert-results-mode-map 'normal)
-  (evil-add-ijkl-bindings Info-mode-map 'motion)
   (evil-add-ijkl-bindings ag-mode-map 'motion)
   (evil-add-ijkl-bindings speedbar-mode-map 'motion
     "h" 'speedbar-item-info
