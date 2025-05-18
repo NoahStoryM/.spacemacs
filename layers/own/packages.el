@@ -1,3 +1,4 @@
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;;; packages.el --- own layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2025 Sylvain Benner & Contributors
@@ -40,7 +41,15 @@
 
 ;;; Code:
 
-(defconst own-packages '()
+(defconst own-packages
+  '(
+    enhanced-evil-paredit
+    guix
+    on-parens
+    (pyim-tsinghua-dict :location
+                        (recipe :fetcher github
+                                :repo "redguardtoo/pyim-tsinghua-dict"))
+    )
   "The list of Lisp packages required by the own layer.
 
 Each entry is either:
@@ -67,3 +76,36 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+(defun own/init-enhanced-evil-paredit ()
+  (use-package enhanced-evil-paredit
+    :defer t
+    :hook
+    (paredit-mode     . enhanced-evil-paredit-mode)
+    (clojure-mode     . paredit-mode)
+    (common-lisp-mode . paredit-mode)
+    (emacs-lisp-mode  . paredit-mode)
+    (racket-mode      . paredit-mode)
+    (racket-repl-mode . paredit-mode)
+    (scheme-mode      . paredit-mode)))
+
+(defun own/init-guix ()
+  (use-package guix
+    :defer t
+    :hook
+    (dired-mode  . guix-prettify-mode)
+    (eshell-mode . guix-prettify-mode)
+    (shell-mode  . guix-prettify-mode)
+    (eshell-mode . guix-build-log-minor-mode)
+    (shell-mode  . guix-build-log-minor-mode)
+    (scheme-mode . guix-devel-mode)))
+
+(defun own/init-on-parens ()
+  (use-package on-parens
+    :defer t))
+
+(defun own/init-pyim-tsinghua-dict ()
+  (use-package pyim-tsinghua-dict
+    :defer t
+    :config
+    (pyim-tsinghua-dict-enable)))

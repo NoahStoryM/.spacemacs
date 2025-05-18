@@ -34,95 +34,9 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(
      ;; ----------------------------------------------------------------
-     ;; Languages
-     ;; ----------------------------------------------------------------
-     ;; agda
-     ;; clojure
-     ;; common-lisp
-     ;; coq
-     ;; csharp
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode)
-     emacs-lisp
-     ;; go
-     ;; haskell
-     ;; idris
-     ;; java
-     ;; javascript
-     latex
-     ;; lua
-     ;; major-modes
-     ;; typescript
-     ;; php
-     python
-     racket
-     ;; ruby
-     ;; rust
-     (scheme :variables
-             scheme-implementations '(chez))
-     ;; sml
-     ;; solidity
-     ;; sql
-     ;; vimscript
-
-     ;; ----------------------------------------------------------------
-     ;; File formats
-     ;; ----------------------------------------------------------------
-     csv
-     graphviz
-     html
-     pdf
-     yaml
-
-     ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     (auto-completion :variables
-                      auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-snippets-in-popup t)
-     (better-defaults :variables
-                      better-defaults-move-to-end-of-code-first t)
-     ;; (colors :variables
-     ;;         colors-enable-nyan-cat-progress-bar t)
-     ;; eaf
-     (git :variables
-          git-magit-status-fullscreen t
-          magit-push-always-verify nil
-          magit-save-repository-buffers 'dontask
-          magit-revert-buffers 'silent
-          magit-refs-show-commit-count 'all
-          magit-revision-show-gravatars nil)
-     helm
-     (ibuffer :variables
-              ibuffer-group-buffers-by 'projects)
-     imenu-list
-     ;; ivy
-     ;; lsp
-     markdown
-     (multiple-cursors :variables
-                       multiple-cursors-backend 'evil-mc)
-     (org :variables
-          org-want-todo-bindings t)
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom
-            shell-default-shell 'eshell)
-     semantic
-     smex
-     spell-checking
-     syntax-checking
-     (templates :variables
-                templates-private-directory (file-name-concat dotspacemacs-directory "templates"))
-     (treemacs :variables
-               treemacs--width-is-locked nil
-               treemacs-width 20)
-     version-control
-     ;; ycmd
-
-     ;; ----------------------------------------------------------------
-     ;; Local
      ;; ----------------------------------------------------------------
      own
      )
@@ -326,7 +240,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key ","
+   dotspacemacs-major-mode-leader-key "'"
 
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m" for terminal mode, "M-<return>" for GUI mode).
@@ -340,7 +254,7 @@ It should only modify the values of Spacemacs settings."
    ;; and TAB or `C-m' and `RET'.
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
-   dotspacemacs-distinguish-gui-tab nil
+   dotspacemacs-distinguish-gui-tab t
 
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
@@ -492,13 +406,12 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-line-numbers '(
                                :relative t
                                :visual t
-                               :size-limit-kb 1000
+                               :size-limit-kb 1024
                                :enabled-for-modes
-                               ;; dired-mode
-                               ;; eww-mode
-                               geiser-repl-mode
+                               dired-mode
+                               eww-mode
                                ibuffer-mode
-                               ;; json-mode
+                               Info-mode
                                magit-mode
                                markdown-mode
                                ;; matlab-mode
@@ -655,6 +568,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (progn ;; Custom file
+    (setopt custom-file (expand-file-name ".cache/custom.el" dotspacemacs-directory))
+    (load custom-file))
   )
 
 (defun dotspacemacs/user-load ()
@@ -670,11 +586,13 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq treemacs-width 20)
-  (setq electric-pair-delete-adjacent-pairs 'nil)
-  (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
-  (setq show-paren-style 'expression)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+  )

@@ -1,3 +1,4 @@
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;;; keybindings.el --- own layer keybindings file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2025 Sylvain Benner & Contributors
@@ -9,18 +10,290 @@
 
 ;;; Code:
 
-(keyboard-translate ?\( ?\[)
-(keyboard-translate ?\[ ?\()
-(keyboard-translate ?\) ?\])
-(keyboard-translate ?\] ?\))
+(progn ;; KBD Grf
+  (keymap-set key-translation-map "C-SPC" "<escape>")
+  (keymap-set key-translation-map "C-(" "<escape>")
+  (keymap-set input-decode-map "C-i" "H-i")
+  (dolist (state-map
+           (list evil-motion-state-map
+                 evil-normal-state-map
+                 evil-visual-state-map))
+    (keymap-clear state-map '("" "C-" "H-" "M-" "S-")))
+  (dotimes (i 10)
+    (keymap-set evil-motion-state-map (format "%d" i) 'digit-argument))
+  (dolist
+      (p
+       '(
+         ("`" . evil-use-register)
 
-(define-key evil-emacs-state-map (kbd "<C-tab>") 'evil-normal-state)
-(define-key evil-hybrid-state-map (kbd "<C-tab>") 'evil-normal-state)
-(define-key evil-insert-state-map (kbd "<C-tab>") 'evil-normal-state)
+         ("i" . evil-previous-line)
+         ("j" . evil-backward-char)
+         ("k" . evil-next-line)
+         ("l" . evil-forward-char)
+         ("u" . evil-backward-word-begin)
+         ("o" . evil-forward-word-end)
+         ("U" . evil-backward-WORD-end)
+         ("O" . evil-forward-WORD-begin)
 
-(define-key evil-insert-state-map (kbd "C-n") 'nil)
-(define-key evil-insert-state-map (kbd "C-p") 'nil)
-(define-key evil-insert-state-map (kbd "C-Y") 'nil)
-(define-key evil-ex-completion-map (kbd "C-b") 'nil)
-(define-key evil-ex-completion-map (kbd "C-f") 'nil)
-(define-key evil-ex-search-keymap (kbd "C-f") 'nil)
+         ("H-i" . evil-scroll-up)
+         ("C-j" . evil-scroll-page-up)
+         ("C-k" . evil-scroll-down)
+         ("C-l" . evil-scroll-page-down)
+         ("C-u" . evil-scroll-line-up)
+         ("C-o" . evil-scroll-line-down)
+
+         ("M-i" . evil-window-up)
+         ("M-j" . evil-window-left)
+         ("M-k" . evil-window-down)
+         ("M-l" . evil-window-right)
+         ("M-u" . evil-window-prev)
+         ("M-o" . evil-window-next)
+
+         ("I" . evil-ex-search-previous)
+         ("J" . evil-ex-search-backward)
+         ("K" . evil-ex-search-next)
+         ("L" . evil-ex-search-forward)
+
+         ("b" . evil-visual-char)
+         ("B" . evil-visual-line)
+         ("C-b" . evil-visual-block)
+
+         ("h" . evil-first-non-blank)
+         (";" . evil-end-of-line)
+
+         ("m" . own/backward-left-bracket)
+         ("," . evil-jump-item)
+         ("." . own/forward-right-bracket)
+
+         ("p" . evil-goto-mark)
+         ("P" . evil-set-marker)
+
+         ("y" . evil-execute-macro)
+         ("Y" . evil-record-macro)
+
+         ("n" . evil-window-middle)
+
+         (":" . evil-ex)
+         ("\\" . hs-toggle-hidin)
+         ("/" . evil-repeat)
+
+         ("M-i" . evil-window-top)
+         ("M-k" . evil-window-bottom)
+         ))
+    (keymap-set evil-motion-state-map (car p) (cdr p)))
+
+  (evil-add-ijkl-bindings Buffer-menu-mode-map 'motion)
+  (evil-add-ijkl-bindings dictionary-mode-map 'motion)
+  (evil-add-ijkl-bindings ert-results-mode-map 'normal)
+  (evil-add-ijkl-bindings Info-mode-map 'motion)
+  (evil-add-ijkl-bindings ag-mode-map 'motion)
+  (evil-add-ijkl-bindings speedbar-mode-map 'motion
+    "h" 'speedbar-item-info
+    "i" 'speedbar-prev
+    "j" 'backward-char
+    "k" 'speedbar-next
+    "l" 'forward-char)
+
+  (dolist
+      (p
+       '(
+         ("e" . evil-change)
+         ("s" . backward-delete-char)
+         ("d" . evil-delete)
+         ("f" . delete-char)
+         ("w" . backward-kill-word)
+         ("r" . kill-word)
+
+         ("E" . evil-change-line)
+         ("D" . evil-delete-line)
+
+         ("a" . evil-insert)
+         ("g" . evil-append)
+         ("q" . evil-open-below)
+         ("t" . evil-replace)
+
+         ("A" . evil-insert-line)
+         ("G" . evil-append-line)
+         ("Q" . evil-open-above)
+         ("T" . evil-enter-replace-state)
+
+         ("z" . comment-dwim)
+         ("x" . evil-undo)
+         ("c" . evil-redo)
+         ("v" . evil-paste-after)
+         ("V" . evil-paste-before)
+
+         ("Z" . evil-join)
+         ))
+    (keymap-set evil-normal-state-map (car p) (cdr p)))
+
+  (dolist
+      (p
+       `(
+         ("s" . evil-surround-region)
+
+         ("b" . evil-exit-visual-state)
+         ("x" . evil-delete-char)
+         ("X" . evil-delete-backward-char)
+         ("c" . evil-yank)
+         ("C" . evil-yank-line)
+         ))
+    (keymap-set evil-visual-state-map (car p) (cdr p)))
+
+  (require 'paredit)
+  (keymap-set paredit-mode-map "C-d" nil)
+  (keymap-set paredit-mode-map "C-k" nil)
+  (keymap-set paredit-mode-map "M-k" nil)
+  (evil-define-key '(emacs hybrid insert) paredit-mode-map
+    (kbd "C-d") 'paredit-delete-char
+    (kbd "C-k") 'paredit-kill
+    (kbd "M-k") 'paredit-forward-kill-word)
+
+  (evil-define-key 'normal enhanced-evil-paredit-mode-map
+    (kbd "P") nil
+    (kbd "p") nil
+    (kbd "c") nil
+    (kbd "y") nil
+    (kbd "D") nil
+    (kbd "C") nil
+    (kbd "S") nil
+    (kbd "Y") nil
+    (kbd "X") nil
+    (kbd "x") nil
+    (kbd "v") 'enhanced-evil-paredit-paste-after
+    (kbd "V") 'enhanced-evil-paredit-paste-before
+    (kbd "d") 'enhanced-evil-paredit-delete
+    (kbd "D") 'enhanced-evil-paredit-delete-line
+    (kbd "e") 'enhanced-evil-paredit-change
+    (kbd "E") 'enhanced-evil-paredit-change-line)
+
+  (evil-define-key 'visual enhanced-evil-paredit-mode-map
+    (kbd "z") 'paredit-comment-dwim
+    (kbd "x") 'evil-delete-char
+    (kbd "X") 'evil-delete-backward-char
+    (kbd "c") 'enhanced-evil-paredit-yank
+    (kbd "C") 'enhanced-evil-paredit-yank-line)
+
+  (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
+  (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
+
+  (evil-define-key '(visual operator) 'evil-org-mode
+    (kbd "i e") nil
+    (kbd "i E") nil
+    (kbd "i r") nil
+    (kbd "i R") nil
+    (kbd "i")   'evil-previous-line
+    (kbd "h e") 'evil-org-inner-object
+    (kbd "h E") 'evil-org-inner-element
+    (kbd "h r") 'evil-org-inner-greater-element
+    (kbd "h R") 'evil-org-inner-subtree)
+  )
+
+(progn ;; Basic
+  (custom-set-variables
+   '(evil-want-C-i-jump nil)
+   '(evil-want-C-u-scroll nil)
+   '(evil-want-C-d-scroll nil))
+  (keymap-set evil-insert-state-map "C-n" nil)
+  (keymap-set evil-insert-state-map "C-p" nil)
+  (keymap-set evil-insert-state-map "C-Y" nil)
+  (keymap-set evil-ex-completion-map "C-b" nil)
+  (keymap-set evil-ex-completion-map "C-f" nil)
+  (keymap-set evil-ex-completion-map "C-d" nil)
+  (keymap-set evil-ex-search-keymap "C-f" nil)
+  (keymap-set evil-normal-state-map "C-<return>" 'newline-and-indent)
+  (keymap-set evil-normal-state-map "DEL" 'evil-delete-backward-char)
+  (keymap-global-set "C-S-d" 'delete-backward-char)
+  (keymap-global-set "C-S-a" 'mwim-end-of-code-or-line)
+  (keymap-global-set "C-S-x" 'kill-region)
+  (keymap-global-set "C-S-c" 'kill-ring-save)
+  (keymap-global-set "C-S-v" 'yank)
+  (keymap-global-set "M-S-v" 'yank-pop)
+  (keymap-global-set "M-f" 'forward-word)
+  (keymap-global-set "M-b" 'backward-word)
+  (keymap-global-set "M-d" 'kill-word)
+  (spacemacs/set-leader-keys "M-m" 'spacemacs/smex)
+  (spacemacs/set-leader-keys "b c" 'kill-buffer))
+
+(progn ;; EXWM
+  (keymap-global-set "C-q" 'exwm-input-release-keyboard)
+  (push ?\C-\\ exwm-input-prefix-keys))
+
+(progn ;; Guix
+  (spacemacs/set-leader-keys "g x" 'guix))
+
+(progn ;; Tab bar
+  (dolist (i (number-sequence 1 9))
+    (spacemacs/set-leader-keys (format "M-%d" i) 'tab-bar-select-tab))
+  (spacemacs/set-leader-keys "M-0" 'tab-bar-select-tab-by-name)
+  (spacemacs/set-leader-keys "M--" 'tab-bar-close-tab)
+  (spacemacs/set-leader-keys "M-=" 'tab-bar-new-tab)
+  (custom-set-variables '(tab-bar-select-tab-modifiers '(super)))
+  (keymap-global-set "s-0" 'tab-bar-select-tab-by-name)
+  (keymap-global-set "s--" 'tab-bar-close-tab)
+  (keymap-global-set "s-=" 'tab-bar-new-tab))
+
+(progn ;; Theme
+  (spacemacs/set-leader-keys "T s" 'own/helm-themes))
+
+(progn ;; Ido
+  (require 'ido)
+  (keymap-set ido-common-completion-map "C-j" 'ido-next-match)
+  (keymap-set ido-common-completion-map "C-k" 'ido-prev-match)
+  (keymap-set ido-common-completion-map "C-l" 'ido-select-text))
+
+(progn ;; Input method
+  (keymap-global-set "C-S-SPC" 'toggle-input-method)
+  ;; (spacemacs/set-leader-keys "\\" 'scratch-buffer)
+  (require 'pyim)
+  (pyim-scheme-add
+   '(guobiao-shuangpin
+     :document "国标双拼方案"
+     :class shuangpin
+     :first-chars "abcdefghijklmnopqrstuvwxyz"
+     :rest-chars  "abcdefghijklmnopqrstuvwxyz"
+     :prefer-triggers nil
+     :cregexp-support-p t
+     :keymaps
+     (("a" "a" "a")
+      ("b" "b" "ei")
+      ("c" "c" "ao")
+      ("d" "d" "ian")
+      ("e" "e" "e")
+      ("f" "f" "an")
+      ("g" "g" "ang")
+      ("h" "h" "eng")
+      ("i" "ch" "i")
+      ("j" "j" "ing")
+      ("k" "k" "ai")
+      ("l" "l" "in" "er")
+      ("m" "m" "iao")
+      ("n" "n" "iang" "uang")
+      ("o" "o" "o" "uo")
+      ("p" "p" "ou")
+      ("q" "q" "ia" "ua")
+      ("r" "r" "en")
+      ("s" "s" "iong" "ong")
+      ("t" "t" "ie")
+      ("u" "sh" "u")
+      ("v" "zh" "v" "ui")
+      ("w" "w" "van" "uan")
+      ("x" "x" "ve" "ue")
+      ("y" "y" "iu" "uai")
+      ("z" "z" "vn" "un")
+      ("aa" "a")
+      ("ak" "ai")
+      ("af" "an")
+      ("ag" "ang")
+      ("ac" "ao")
+      ("ae" "e")
+      ("ab" "ei")
+      ("ar" "en")
+      ("ah" "eng")
+      ("a" "er")
+      ("ao" "o")
+      ("ap" "ou"))))
+  (pyim-default-scheme 'guobiao-shuangpin))
+
+(progn ;; YASnippet
+  (keymap-global-set "<backtab>" 'company-yasnippet))
