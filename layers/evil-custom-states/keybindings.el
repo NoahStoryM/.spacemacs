@@ -11,8 +11,6 @@
 ;;; Code:
 
 (keymap-set input-decode-map "C-i" "H-i")
-(dotimes (i 10)
-  (keymap-set evil-custom-motion-state-map (format "%d" i) 'digit-argument))
 (dolist
     (p
      '(
