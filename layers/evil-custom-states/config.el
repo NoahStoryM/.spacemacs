@@ -10,5 +10,5 @@
 
 ;;; Code:
 
-(spacemacs/add-evil-cursor "custom-motion" "plum3" 'box)
-(spacemacs/add-evil-cursor "custom-normal" "DarkGoldenrod2" 'box)
+(spacemacs/add-evil-cursor "custom-motion" "turquoise" 'box)
+(spacemacs/add-evil-cursor "custom-normal" "MediumPurple1" 'box)
