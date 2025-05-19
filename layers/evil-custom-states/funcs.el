@@ -28,6 +28,33 @@
         (keymap-set keymap key nil)))))
 
 ;; Evil
+(defun evil-close-above (count)
+  "Insert a new line above point.
+The insertion will be repeated COUNT times."
+  (interactive "p")
+  (evil-open-above count)
+  (evil-custom-normal-state))
+
+(defun evil-close-below (count)
+  "Insert a new line below point.
+The insertion will be repeated COUNT times."
+  (interactive "p")
+  (evil-open-below count)
+  (evil-custom-normal-state))
+
+(defun evil-insert-once ()
+  "Insert characters."
+  (interactive)
+  (evil-insert-state)
+  (unwind-protect (insert (read-char))
+    (evil-custom-normal-state)))
+
+(defun evil-append-once ()
+  "Append characters."
+  (interactive)
+  (right-char 1)
+  (evil-insert-once))
+
 (defmacro evil-add-ijkl-bindings (keymap &optional state &rest bindings)
   "Add \"i\", \"j\", \"k\", \"l\" bindings to KEYMAP in STATE.
 Add additional BINDINGS if specified."

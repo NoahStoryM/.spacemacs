@@ -82,11 +82,10 @@
     (kbd "v") 'enhanced-evil-paredit-paste-after
     (kbd "V") 'enhanced-evil-paredit-paste-before
     (kbd "d") 'enhanced-evil-paredit-delete
-    (kbd "D") 'enhanced-evil-paredit-delete-line
-    (kbd "e") 'enhanced-evil-paredit-change
-    (kbd "E") 'enhanced-evil-paredit-change-line)
+    (kbd "F") 'enhanced-evil-paredit-delete-line
+    (kbd "D") 'enhanced-evil-paredit-change)
 
-  (evil-define-key 'custom-visual enhanced-evil-paredit-mode-map
+  (evil-define-key 'visual enhanced-evil-paredit-mode-map
     (kbd "z") 'paredit-comment-dwim
     (kbd "x") 'evil-delete-char
     (kbd "X") 'evil-delete-backward-char

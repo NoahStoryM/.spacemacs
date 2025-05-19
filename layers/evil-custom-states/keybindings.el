@@ -17,6 +17,8 @@
        ("C-<tab>" . evil-motion-state)
 
        ("`" . evil-use-register)
+       ("-" . evil-goto-line)
+       ("=" . evil-goto-column)
 
        ("i" . evil-previous-line)
        ("j" . evil-backward-char)
@@ -27,10 +29,17 @@
        ("U" . evil-backward-WORD-end)
        ("O" . evil-forward-WORD-begin)
 
-       ("H-i" . evil-scroll-up)
-       ("C-j" . evil-scroll-page-up)
-       ("C-k" . evil-scroll-down)
-       ("C-l" . evil-scroll-page-down)
+       ("h" . evil-first-non-blank)
+       (";" . evil-end-of-line)
+
+       ("m" . evil-custom-states/backward-left-bracket)
+       ("," . evil-jump-item)
+       ("." . evil-custom-states/forward-right-bracket)
+
+       ("H-i" . evil-scroll-page-up)
+       ("C-j" . evil-scroll-up)
+       ("C-k" . evil-scroll-page-down)
+       ("C-l" . evil-scroll-down)
        ("C-u" . evil-scroll-line-up)
        ("C-o" . evil-scroll-line-down)
 
@@ -41,21 +50,14 @@
        ("M-u" . evil-window-prev)
        ("M-o" . evil-window-next)
 
-       ("I" . evil-ex-search-previous)
-       ("J" . evil-ex-search-backward)
-       ("K" . evil-ex-search-next)
-       ("L" . evil-ex-search-forward)
+       ("I" . evil-ex-search-backward)
+       ("J" . evil-ex-search-previous)
+       ("K" . evil-ex-search-forward)
+       ("L" . evil-ex-search-next)
 
        ("b" . evil-visual-char)
        ("B" . evil-visual-line)
        ("C-b" . evil-visual-block)
-
-       ("h" . evil-first-non-blank)
-       (";" . evil-end-of-line)
-
-       ("m" . evil-custom-states/backward-left-bracket)
-       ("," . evil-jump-item)
-       ("." . evil-custom-states/forward-right-bracket)
 
        ("p" . evil-goto-mark)
        ("P" . evil-set-marker)
@@ -63,7 +65,9 @@
        ("y" . evil-execute-macro)
        ("Y" . evil-record-macro)
 
-       ("n" . evil-window-middle)
+       ("n"   . evil-window-middle)
+       ("N"   . evil-window-top)
+       ("C-n" . evil-window-bottom)
 
        (":" . evil-ex)
        ("\\" . hs-toggle-hidin)
@@ -91,25 +95,27 @@
        ("C-<tab>" . evil-normal-state)
        ("<escape>" . evil-force-custom-normal-state)
 
-       ("e" . evil-change)
+       ("e" . evil-replace)
        ("s" . backward-delete-char)
        ("d" . evil-delete)
        ("f" . delete-char)
        ("w" . backward-kill-word)
        ("r" . kill-word)
 
-       ("E" . evil-change-line)
-       ("D" . evil-delete-line)
+       ("S" . evil-join)
+       ("E" . evil-enter-replace-state)
+       ("D" . evil-change)
+       ("F" . evil-delete-line)
 
+       ("q" . evil-open-above)
+       ("t" . evil-open-below)
        ("a" . evil-insert)
        ("g" . evil-append)
-       ("q" . evil-open-below)
-       ("t" . evil-replace)
 
-       ("A" . evil-insert-line)
-       ("G" . evil-append-line)
-       ("Q" . evil-open-above)
-       ("T" . evil-enter-replace-state)
+       ("Q" . evil-close-above)
+       ("T" . evil-close-below)
+       ("A" . evil-insert-once)
+       ("G" . evil-append-once)
 
        ("z" . comment-dwim)
        ("x" . evil-undo)
@@ -117,7 +123,7 @@
        ("v" . evil-paste-after)
        ("V" . evil-paste-before)
 
-       ("Z" . evil-join)
+       ("C-m" . newline-and-indent)
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p))
   (keymap-set evil-custom-normal-state-map (car p) (cdr p)))
@@ -126,20 +132,47 @@
 (dolist
     (p
      `(
-       ("s" . evil-surround-region)
+       ("<escape>" . evil-custom-normal-state)
+       ;; ("H-i" . evil-previous-line)
+       ;; ("C-j" . evil-backward-char)
+       ;; ("C-k" . evil-next-line)
+       ;; ("C-l" . evil-forward-char)
+       ;; ("C-u" . evil-backward-word-begin)
+       ;; ("C-o" . evil-forward-word-end)
+       ;; ("C-U" . evil-backward-WORD-end)
+       ;; ("C-O" . evil-forward-WORD-begin)
 
-       ("b" . evil-exit-visual-state)
-       ("x" . evil-delete-char)
-       ("X" . evil-delete-backward-char)
-       ("c" . evil-yank)
-       ("C" . evil-yank-line)
+       ;; ("C-h" . evil-first-non-blank)
+       ;; ("C-;" . evil-end-of-line)
+
+       ;; ("C-m" . evil-custom-states/backward-left-bracket)
+       ;; ("C-," . evil-jump-item)
+       ;; ("C-." . evil-custom-states/forward-right-bracket)
+
+       ;; ("M-i" . evil-window-up)
+       ;; ("M-j" . evil-window-left)
+       ;; ("M-k" . evil-window-down)
+       ;; ("M-l" . evil-window-right)
+       ;; ("M-u" . evil-window-prev)
+       ;; ("M-o" . evil-window-next)
+
+       ;; ("C-e" . evil-replace)
+       ;; ("C-s" . backward-delete-char)
+       ;; ("C-d" . evil-delete)
+       ;; ("C-f" . delete-char)
+       ;; ("C-w" . backward-kill-word)
+       ;; ("C-r" . kill-word)
+
+       ;; ("C-q" . evil-open-above)
+       ;; ("C-t" . evil-open-below)
+       ;; ("C-a" . evil-custom-normal-state)
+
+       ;; ("C-z" . comment-dwim)
+       ;; ("C-x" . evil-undo)
+       ;; ("C-c" . evil-redo)
+       ;; ("C-v" . evil-paste-after)
+       ;; ("C-V" . evil-paste-before)
        ))
-  (keymap-set evil-visual-state-map (car p) (cdr p)))
-
-(dolist (evil-state-map
-         (list evil-emacs-state-map
-               evil-hybrid-state-map
-               evil-insert-state-map
-               evil-custom-motion-state-map
-               evil-replace-state-map))
-  (keymap-set evil-state-map "<escape>" 'evil-custom-normal-state))
+  (dolist (evil-state-map
+           (list evil-insert-state-map))
+    (keymap-set evil-state-map (car p) (cdr p))))
