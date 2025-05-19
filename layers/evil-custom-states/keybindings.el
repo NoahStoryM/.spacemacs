@@ -55,9 +55,9 @@
        ("K" . evil-ex-search-forward)
        ("L" . evil-ex-search-next)
 
-       ("b" . evil-visual-char)
-       ("B" . evil-visual-line)
-       ("C-b" . evil-visual-block)
+       ("c" . evil-visual-char)
+       ("C" . evil-visual-line)
+       ("C-c" . evil-visual-block)
 
        ("p" . evil-goto-mark)
        ("P" . evil-set-marker)
@@ -102,7 +102,7 @@
        ("w" . backward-kill-word)
        ("r" . kill-word)
 
-       ("S" . evil-join)
+       ("S" . evil-delete-back-to-indentation)
        ("E" . evil-enter-replace-state)
        ("D" . evil-change)
        ("F" . evil-delete-line)
@@ -117,17 +117,30 @@
        ("A" . evil-insert-once)
        ("G" . evil-append-once)
 
-       ("z" . comment-dwim)
-       ("x" . evil-undo)
-       ("c" . evil-redo)
+       ("z" . evil-undo)
+       ("x" . evil-redo)
        ("v" . evil-paste-after)
        ("V" . evil-paste-before)
+       ("b" . comment-dwim)
 
+       ("C-e" . raise-sexp)
+       ("C-d" . evil-join)
        ("C-m" . newline-and-indent)
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p))
   (keymap-set evil-custom-normal-state-map (car p) (cdr p)))
 (keymap-set evil-normal-state-map "C-<tab>" 'evil-custom-normal-state)
+
+(dolist
+    (p
+     '(
+       ("z" . 'evil-exit-visual-state)
+       ("x" . 'evil-delete-char)
+       ("X" . 'evil-delete-backward-char)
+       ("c" . 'evil-yank)
+       ("C" . 'evil-yank-line)
+       ))
+  (keymap-set evil-visual-state-map (car p) (cdr p)))
 
 (dolist
     (p

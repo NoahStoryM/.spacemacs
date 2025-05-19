@@ -79,6 +79,7 @@
     (kbd "Y") nil
     (kbd "X") nil
     (kbd "x") nil
+    (kbd "b") 'paredit-comment-dwim
     (kbd "v") 'enhanced-evil-paredit-paste-after
     (kbd "V") 'enhanced-evil-paredit-paste-before
     (kbd "d") 'enhanced-evil-paredit-delete
@@ -86,7 +87,6 @@
     (kbd "D") 'enhanced-evil-paredit-change)
 
   (evil-define-key 'visual enhanced-evil-paredit-mode-map
-    (kbd "z") 'paredit-comment-dwim
     (kbd "x") 'evil-delete-char
     (kbd "X") 'evil-delete-backward-char
     (kbd "c") 'enhanced-evil-paredit-yank
