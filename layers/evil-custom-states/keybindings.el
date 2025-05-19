@@ -16,6 +16,8 @@
 (dolist
     (p
      '(
+       ("C-<tab>" . evil-motion-state)
+
        ("`" . evil-use-register)
 
        ("i" . evil-previous-line)
@@ -53,9 +55,9 @@
        ("h" . evil-first-non-blank)
        (";" . evil-end-of-line)
 
-       ("m" . own/backward-left-bracket)
+       ("m" . evil-custom-states/backward-left-bracket)
        ("," . evil-jump-item)
-       ("." . own/forward-right-bracket)
+       ("." . evil-custom-states/forward-right-bracket)
 
        ("p" . evil-goto-mark)
        ("P" . evil-set-marker)
@@ -71,6 +73,7 @@
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p))
   (keymap-set evil-custom-motion-state-map (car p) (cdr p)))
+(keymap-set evil-motion-state-map "C-<tab>" 'evil-custom-motion-state)
 
 (evil-add-ijkl-bindings Buffer-menu-mode-map 'custom-motion)
 (evil-add-ijkl-bindings dictionary-mode-map 'custom-motion)
@@ -87,6 +90,7 @@
 (dolist
     (p
      '(
+       ("C-<tab>" . evil-normal-state)
        ("<escape>" . evil-force-custom-normal-state)
 
        ("e" . evil-change)
@@ -119,6 +123,7 @@
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p))
   (keymap-set evil-custom-normal-state-map (car p) (cdr p)))
+(keymap-set evil-normal-state-map "C-<tab>" 'evil-custom-normal-state)
 
 (dolist
     (p
@@ -135,7 +140,8 @@
 
 (dolist (evil-state-map
          (list evil-emacs-state-map
-               evil-replace-state-map
                evil-hybrid-state-map
-               evil-insert-state-map))
+               evil-insert-state-map
+               evil-custom-motion-state-map
+               evil-replace-state-map))
   (keymap-set evil-state-map "<escape>" 'evil-custom-normal-state))
