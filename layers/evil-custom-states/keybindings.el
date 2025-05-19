@@ -81,9 +81,10 @@
 
 (evil-custom-add-ijkl-bindings Buffer-menu-mode-map 'custom-motion)
 (evil-custom-add-ijkl-bindings dictionary-mode-map 'custom-motion)
-(evil-custom-add-ijkl-bindings Info-mode-map 'custom-normal)
 (evil-custom-add-ijkl-bindings ert-results-mode-map 'custom-normal)
 (evil-custom-add-ijkl-bindings ag-mode-map 'custom-motion)
+(evil-custom-add-ijkl-bindings Info-mode-map 'custom-normal
+  "C-m" 'Info-follow-nearest-node)
 (evil-custom-add-ijkl-bindings speedbar-mode-map 'custom-motion
   "h" 'speedbar-item-info
   "i" 'speedbar-prev
