@@ -55,19 +55,19 @@ The insertion will be repeated COUNT times."
   (right-char 1)
   (evil-insert-once))
 
-(defmacro evil-add-ijkl-bindings (keymap &optional state &rest bindings)
+;; Evil custom
+(defmacro evil-custom-add-ijkl-bindings (keymap &optional state &rest bindings)
   "Add \"i\", \"j\", \"k\", \"l\" bindings to KEYMAP in STATE.
 Add additional BINDINGS if specified."
   (declare (indent defun))
   `(evil-define-key ,state ,keymap
-     "i" (lookup-key evil-motion-state-map "i")
-     "j" (lookup-key evil-motion-state-map "j")
-     "k" (lookup-key evil-motion-state-map "k")
-     "l" (lookup-key evil-motion-state-map "l")
-     ":" (lookup-key evil-motion-state-map ":")
+     "i" (lookup-key evil-custom-motion-state-map "i")
+     "j" (lookup-key evil-custom-motion-state-map "j")
+     "k" (lookup-key evil-custom-motion-state-map "k")
+     "l" (lookup-key evil-custom-motion-state-map "l")
+     ":" (lookup-key evil-custom-motion-state-map ":")
      ,@bindings))
 
-;; Brackets
 (defvar evil-custom-states/brackets '("\"\"" "“”" "()" "[]" "{}" "<>" "＜＞" "（）" "［］" "｛｝" "⦅⦆" "〚〛" "⦃⦄" "‹›" "«»" "「」" "〈〉" "《》" "【】" "〔〕" "⦗⦘" "『』" "〖〗" "〘〙" "｢｣" "⟦⟧" "⟨⟩" "⟪⟫" "⟮⟯" "⟬⟭" "⌈⌉" "⌊⌋" "⦇⦈" "⦉⦊" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱" "❲❳" "〈〉" "⦑⦒" "⧼⧽" "﹙﹚" "﹛﹜" "﹝﹞" "⁽⁾" "₍₎" "⦋⦌" "⦍⦎" "⦏⦐" "⁅⁆" "⸢⸣" "⸤⸥" "⟅⟆" "⦓⦔" "⦕⦖" "⸦⸧" "⸨⸩" "｟｠")
   "A list of strings, each element is a string of 2 chars, the left bracket and a matching right bracket.")
 

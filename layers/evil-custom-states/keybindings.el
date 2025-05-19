@@ -77,12 +77,12 @@
   (keymap-set evil-custom-motion-state-map (car p) (cdr p)))
 (keymap-set evil-motion-state-map "C-<tab>" 'evil-custom-motion-state)
 
-(evil-add-ijkl-bindings Buffer-menu-mode-map 'custom-motion)
-(evil-add-ijkl-bindings dictionary-mode-map 'custom-motion)
-(evil-add-ijkl-bindings Info-mode-map 'custom-normal)
-(evil-add-ijkl-bindings ert-results-mode-map 'custom-normal)
-(evil-add-ijkl-bindings ag-mode-map 'custom-motion)
-(evil-add-ijkl-bindings speedbar-mode-map 'custom-motion
+(evil-custom-add-ijkl-bindings Buffer-menu-mode-map 'custom-motion)
+(evil-custom-add-ijkl-bindings dictionary-mode-map 'custom-motion)
+(evil-custom-add-ijkl-bindings Info-mode-map 'custom-normal)
+(evil-custom-add-ijkl-bindings ert-results-mode-map 'custom-normal)
+(evil-custom-add-ijkl-bindings ag-mode-map 'custom-motion)
+(evil-custom-add-ijkl-bindings speedbar-mode-map 'custom-motion
   "h" 'speedbar-item-info
   "i" 'speedbar-prev
   "j" 'backward-char
