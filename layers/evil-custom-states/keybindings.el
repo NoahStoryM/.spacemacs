@@ -69,6 +69,8 @@
        ("N"   . evil-window-top)
        ("C-n" . evil-window-bottom)
 
+       ("C-m" . evil-ret)
+
        (":" . evil-ex)
        ("\\" . hs-toggle-hidin)
        ("/" . evil-repeat)
@@ -125,7 +127,7 @@
 
        ("C-e" . raise-sexp)
        ("C-d" . evil-join)
-       ("C-m" . newline-and-indent)
+       ("C-<return>" . newline-and-indent)
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p))
   (keymap-set evil-custom-normal-state-map (car p) (cdr p)))
