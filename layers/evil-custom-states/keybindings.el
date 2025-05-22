@@ -69,6 +69,7 @@
        ("N"   . evil-window-top)
        ("C-n" . evil-window-bottom)
 
+       ("q" . quit-window)
        ("C-m" . evil-ret)
 
        (":" . evil-ex)
@@ -83,8 +84,8 @@
 (evil-custom-add-ijkl-bindings dictionary-mode-map 'custom-motion)
 (evil-custom-add-ijkl-bindings ert-results-mode-map 'custom-normal)
 (evil-custom-add-ijkl-bindings ag-mode-map 'custom-motion)
-(evil-custom-add-ijkl-bindings Info-mode-map 'custom-normal
-  "C-m" 'Info-follow-nearest-node)
+(evil-custom-add-ijkl-bindings Info-mode-map '(custom-motion custom-normal)
+  "C-<return>" 'Info-follow-nearest-node)
 (evil-custom-add-ijkl-bindings speedbar-mode-map 'custom-motion
   "h" 'speedbar-item-info
   "i" 'speedbar-prev
@@ -137,11 +138,12 @@
 (dolist
     (p
      '(
-       ("z" . 'evil-exit-visual-state)
-       ("x" . 'evil-delete-char)
-       ("X" . 'evil-delete-backward-char)
-       ("c" . 'evil-yank)
-       ("C" . 'evil-yank-line)
+       ("z" . evil-exit-visual-state)
+       ("x" . evil-delete-char)
+       ("X" . evil-delete-backward-char)
+       ("c" . evil-yank)
+       ("C" . evil-visual-line)
+       ("C-c" . evil-visual-block)
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p)))
 
