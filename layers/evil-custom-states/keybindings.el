@@ -142,8 +142,7 @@
        ("x" . evil-delete-char)
        ("X" . evil-delete-backward-char)
        ("c" . evil-yank)
-       ("C" . evil-visual-line)
-       ("C-c" . evil-visual-block)
+       ("M-c" . evil-visual-char)
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p)))
 
