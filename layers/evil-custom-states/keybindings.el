@@ -106,10 +106,8 @@
        ("w" . backward-kill-word)
        ("r" . kill-word)
 
-       ("S" . evil-delete-back-to-indentation)
        ("E" . evil-enter-replace-state)
        ("D" . evil-change)
-       ("F" . evil-delete-line)
 
        ("q" . evil-open-above)
        ("t" . evil-open-below)
@@ -128,7 +126,10 @@
        ("b" . comment-dwim)
 
        ("C-e" . raise-sexp)
+       ("C-s" . evil-delete-back-to-indentation)
        ("C-d" . evil-join)
+       ("C-f" . evil-delete-line)
+
        ("C-<return>" . newline-and-indent)
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p))
