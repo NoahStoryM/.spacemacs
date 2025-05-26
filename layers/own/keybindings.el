@@ -83,9 +83,9 @@
     (kbd "v") 'enhanced-evil-paredit-paste-after
     (kbd "V") 'enhanced-evil-paredit-paste-before
     (kbd "d") 'enhanced-evil-paredit-delete
-    (kbd "F") 'enhanced-evil-paredit-delete-line
-    (kbd "D") 'enhanced-evil-paredit-change
-    (kbd "C-e") 'paredit-raise-sexp)
+    (kbd "C-e") 'paredit-raise-sexp
+    (kbd "C-d") 'enhanced-evil-paredit-change
+    (kbd "C-f") 'enhanced-evil-paredit-delete-line)
 
   (evil-define-key 'visual enhanced-evil-paredit-mode-map
     (kbd "x") 'evil-delete-char
