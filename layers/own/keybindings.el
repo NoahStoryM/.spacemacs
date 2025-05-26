@@ -167,4 +167,5 @@
   (pyim-default-scheme 'guobiao-shuangpin))
 
 (progn ;; YASnippet
-  (keymap-global-set "<backtab>" 'company-yasnippet))
+  (keymap-global-set "<backtab>" 'company-yasnippet)
+  (keymap-global-set "C-l" 'company-yasnippet))
