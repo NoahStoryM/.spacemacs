@@ -106,6 +106,11 @@
        ("w" . backward-kill-word)
        ("r" . kill-word)
 
+       ("C-e" . raise-sexp)
+       ("C-s" . evil-delete-back-to-indentation)
+       ("C-d" . evil-join)
+       ("C-f" . evil-delete-line)
+
        ("E" . evil-enter-replace-state)
        ("D" . evil-change)
 
@@ -124,11 +129,6 @@
        ("v" . evil-paste-after)
        ("V" . evil-paste-before)
        ("b" . comment-dwim)
-
-       ("C-e" . raise-sexp)
-       ("C-s" . evil-delete-back-to-indentation)
-       ("C-d" . evil-join)
-       ("C-f" . evil-delete-line)
 
        ("C-<return>" . newline-and-indent)
        ))
