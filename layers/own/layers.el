@@ -87,6 +87,10 @@
             ibuffer-group-buffers-by 'projects)
    imenu-list
    ;; ivy
+   (llm-client :variables
+               llm-client-enable-gptel t
+               gptel-default-mode 'org-mode
+               llm-client-enable-ellama t)
    ;; lsp
    markdown
    (multiple-cursors :variables
