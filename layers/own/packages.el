@@ -43,11 +43,7 @@
 
 (defconst own-packages
   '(
-    (aidermacs :variables
-               aidermacs-use-architect-mode t
-               aidermacs-architect-model "deepseek/deepseek-reasoner"
-               aidermacs-editor-model "deepseek/deepseek-chat"
-               aidermacs-default-model "deepseek/deepseek-chat")
+    aidermacs
     enhanced-evil-paredit
     guix
     on-parens
@@ -84,7 +80,12 @@ Each entry is either:
 
 (defun own/init-aidermacs ()
   (use-package aidermacs
-    :defer t))
+    :defer t
+    :custom
+    (aidermacs-use-architect-mode t)
+    (aidermacs-architect-model "deepseek/deepseek-reasoner")
+    (aidermacs-editor-model "deepseek/deepseek-chat")
+    (aidermacs-default-model "deepseek/deepseek-chat")))
 
 (defun own/init-enhanced-evil-paredit ()
   (use-package enhanced-evil-paredit
