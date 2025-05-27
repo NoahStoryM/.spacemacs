@@ -58,6 +58,7 @@
        ("c" . evil-visual-char)
        ("C" . evil-visual-line)
        ("C-c" . evil-visual-block)
+       ("M-c" . mark-whole-buffer)
 
        ("p" . evil-goto-mark)
        ("P" . evil-set-marker)
