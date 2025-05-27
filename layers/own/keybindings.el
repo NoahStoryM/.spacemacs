@@ -46,6 +46,9 @@
 (progn ;; Guix
   (spacemacs/set-leader-keys "g x" 'guix))
 
+(progn ;; AI
+  (spacemacs/set-leader-keys "a a" 'aidermacs-transient-menu))
+
 (progn ;; Org
   (evil-define-key '(custom-visual) 'evil-org-mode
     (kbd "i e") nil

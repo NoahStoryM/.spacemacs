@@ -43,6 +43,11 @@
 
 (defconst own-packages
   '(
+    (aidermacs :variables
+               aidermacs-use-architect-mode t
+               aidermacs-architect-model "deepseek/deepseek-reasoner"
+               aidermacs-editor-model "deepseek/deepseek-chat"
+               aidermacs-default-model "deepseek/deepseek-chat")
     enhanced-evil-paredit
     guix
     on-parens
@@ -76,6 +81,10 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+(defun own/init-aidermacs ()
+  (use-package aidermacs
+    :defer t))
 
 (defun own/init-enhanced-evil-paredit ()
   (use-package enhanced-evil-paredit
