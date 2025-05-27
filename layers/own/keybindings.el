@@ -164,7 +164,7 @@
       ("ab" "ei")
       ("ar" "en")
       ("ah" "eng")
-      ("a" "er")
+      ("al" "er")
       ("ao" "o")
       ("ap" "ou"))))
   (pyim-default-scheme 'guobiao-shuangpin))
