@@ -85,7 +85,8 @@ Each entry is either:
     (aidermacs-use-architect-mode t)
     (aidermacs-architect-model "deepseek/deepseek-reasoner")
     (aidermacs-editor-model "deepseek/deepseek-chat")
-    (aidermacs-default-model "deepseek/deepseek-chat")))
+    (aidermacs-default-model "deepseek/deepseek-chat")
+    (aidermacs-weak-model "deepseek/deepseek-chat")))
 
 (defun own/init-enhanced-evil-paredit ()
   (use-package enhanced-evil-paredit
