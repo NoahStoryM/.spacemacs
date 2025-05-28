@@ -45,6 +45,7 @@
   '(
     aidermacs
     enhanced-evil-paredit
+    frameshot
     guix
     on-parens
     (pyim-tsinghua-dict :location
@@ -99,6 +100,12 @@ Each entry is either:
     (racket-mode      . paredit-mode)
     (racket-repl-mode . paredit-mode)
     (scheme-mode      . paredit-mode)))
+
+(defun own/init-frameshot ()
+  (use-package frameshot
+    :defer t
+    :custom
+    (frameshot-mode t)))
 
 (defun own/init-guix ()
   (use-package guix
