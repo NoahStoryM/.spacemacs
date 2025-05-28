@@ -50,7 +50,7 @@
   (spacemacs/set-leader-keys "a a" 'aidermacs-transient-menu))
 
 (progn ;; Org
-  (evil-define-key '(custom-visual) 'evil-org-mode
+  (evil-define-key '(visual) 'evil-org-mode
     (kbd "i e") nil
     (kbd "i E") nil
     (kbd "i r") nil
