@@ -38,7 +38,8 @@
    '(gptel-response-prefix-alist
      '((org-mode . "* assistant\n")
        (markdown-mode . "")
-       (text-mode . "")))))
+       (text-mode . ""))))
+  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll))
 
 (progn ;; Indent
   (custom-set-variables
