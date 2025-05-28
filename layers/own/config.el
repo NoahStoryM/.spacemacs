@@ -28,6 +28,18 @@
     (spacemacs-theme-custom-colors theme)
     (load-theme theme t)))
 
+(progn ;; AI
+  (custom-set-variables
+   '(gptel-temperature 0.7)
+   '(gptel-prompt-prefix-alist
+     '((org-mode . "* user\n")
+       (markdown-mode . "### ")
+       (text-mode . "### ")))
+   '(gptel-response-prefix-alist
+     '((org-mode . "* assistant\n")
+       (markdown-mode . "")
+       (text-mode . "")))))
+
 (progn ;; Indent
   (custom-set-variables
    '(c-basic-offset 4)
