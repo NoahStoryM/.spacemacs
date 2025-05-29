@@ -21,6 +21,7 @@
   (keymap-set evil-insert-state-map "C-n" nil)
   (keymap-set evil-insert-state-map "C-p" nil)
   (keymap-set evil-insert-state-map "C-Y" nil)
+  (keymap-set evil-insert-state-map "C-d" nil)
   (keymap-set evil-ex-completion-map "C-b" nil)
   (keymap-set evil-ex-completion-map "C-f" nil)
   (keymap-set evil-ex-completion-map "C-d" nil)
