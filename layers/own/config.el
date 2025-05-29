@@ -32,11 +32,11 @@
   (custom-set-variables
    '(gptel-temperature 0.7)
    '(gptel-prompt-prefix-alist
-     '((org-mode . "* user\n")
+     '((org-mode . "** user\n")
        (markdown-mode . "### ")
        (text-mode . "### ")))
    '(gptel-response-prefix-alist
-     '((org-mode . "* assistant\n")
+     '((org-mode . "** assistant\n")
        (markdown-mode . "")
        (text-mode . ""))))
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll))
