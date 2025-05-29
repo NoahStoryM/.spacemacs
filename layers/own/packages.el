@@ -51,6 +51,7 @@
     (pyim-tsinghua-dict :location
                         (recipe :fetcher github
                                 :repo "redguardtoo/pyim-tsinghua-dict"))
+    (scribble :location local)
     )
   "The list of Lisp packages required by the own layer.
 
@@ -127,3 +128,11 @@ Each entry is either:
     :defer t
     :config
     (pyim-tsinghua-dict-enable)))
+
+(defun own/init-scribble ()
+  (use-package scribble
+    :defer t
+    :init
+    (require 'scribble)
+    :hook
+    (scribble-mode . (lambda () (setq-local comment-start "@;; ")))))
