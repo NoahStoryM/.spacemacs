@@ -32,6 +32,7 @@
    latex
    ;; lua
    ;; major-modes
+   nixos
    ;; typescript
    ;; php
    python
