@@ -28,9 +28,9 @@
    ;; haskell
    ;; idris
    ;; java
-   ;; javascript
+   javascript
    latex
-   ;; lua
+   lua
    ;; major-modes
    nixos
    ;; typescript
