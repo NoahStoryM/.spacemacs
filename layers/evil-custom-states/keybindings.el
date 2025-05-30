@@ -74,7 +74,7 @@
        ("C-m" . evil-ret)
 
        (":" . evil-ex)
-       ("\\" . hs-toggle-hidin)
+       ("\\" . hs-toggle-hiding)
        ("/" . evil-repeat)
        ))
   (keymap-set evil-visual-state-map (car p) (cdr p))
