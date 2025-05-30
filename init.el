@@ -218,7 +218,7 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Maple Mono NL"
+   dotspacemacs-default-font '("Maple Mono Normal NL NF CN"
                                :size 18.5
                                :weight normal
                                :width normal
@@ -586,7 +586,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (spacemacs//set-monospaced-font "Maple Mono NL" "Maple Mono NL CN" 25 25)
+  (let ((font "Maple Mono Normal NL NF CN") (size 24))
+    (spacemacs//set-monospaced-font font font size size))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
