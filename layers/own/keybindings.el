@@ -131,4 +131,4 @@
     (pyim-default-scheme 'guobiao-shuangpin)))
 
 (progn ;; YASnippet
-  (keymap-global-set "C-l" 'company-yasnippet))
+  (keymap-global-set "C-k" 'company-yasnippet))
