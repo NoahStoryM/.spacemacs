@@ -212,6 +212,18 @@
   (add-hook 'spacemacs-editing-style-hook 'spacemacs//ivy-ijkl-navigation)
   (spacemacs//ivy-ijkl-navigation dotspacemacs-editing-style))
 
+(with-eval-after-load 'ido
+  (keymap-set ido-common-completion-map "C-h" 'nil)
+  (keymap-set ido-common-completion-map "C-i" 'ido-delete-backward-updir)
+  (keymap-set ido-common-completion-map "C-j" 'ido-prev-match)
+  (keymap-set ido-common-completion-map "C-k" 'ido-exit-minibuffer)
+  (keymap-set ido-common-completion-map "C-l" 'ido-next-match)
+  (keymap-set ido-common-completion-map "C-S-h" 'nil)
+  (keymap-set ido-common-completion-map "C-S-i" 'previous-history-element)
+  (keymap-set ido-common-completion-map "C-S-j" 'ido-prev-match-dir)
+  (keymap-set ido-common-completion-map "C-S-k" 'next-history-element)
+  (keymap-set ido-common-completion-map "C-S-l" 'ido-next-match-dir))
+
 (with-eval-after-load 'paredit
   (keymap-set paredit-mode-map "C-d" nil)
   (keymap-set paredit-mode-map "C-k" nil)
