@@ -65,12 +65,20 @@
    '(pyim-page-length 9)
    '(pyim-page-style 'vertical)))
 
+(progn ;; Org
+  (custom-set-variables
+   '(org-src-fontify-natively t)
+   '(org-pretty-entities t))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq-local truncate-lines nil))))
+
 (progn ;; Paren
   (custom-set-variables '(show-paren-style 'expression)))
 
 (progn ;; Tab bar
-  (tab-bar-mode t)
-  (custom-set-variables '(tab-bar-tab-hints t)))
+  (custom-set-variables '(tab-bar-tab-hints t))
+  (tab-bar-mode t))
 
 (progn ;; Treemacs
   (custom-set-variables '(treemacs-width 20)))
