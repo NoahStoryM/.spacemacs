@@ -229,9 +229,7 @@
   (keymap-set paredit-mode-map "C-k" nil)
   (keymap-set paredit-mode-map "M-k" nil)
   (evil-define-key '(emacs hybrid insert) paredit-mode-map
-    (kbd "C-d") 'paredit-delete-char
-    (kbd "C-k") 'paredit-kill
-    (kbd "M-k") 'paredit-forward-kill-word)
+    (kbd "C-d") 'paredit-delete-char)
 
   (evil-define-key 'custom-normal enhanced-evil-paredit-mode-map
     (kbd "P") nil

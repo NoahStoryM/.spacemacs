@@ -131,4 +131,7 @@
     (pyim-default-scheme 'guobiao-shuangpin)))
 
 (progn ;; YASnippet
-  (keymap-global-set "C-k" 'company-yasnippet))
+  (keymap-global-set "C-k" 'company-yasnippet)
+  (keymap-set evil-insert-state-map "C-k" nil)
+  (keymap-set evil-replace-state-map "C-k" nil)
+  (keymap-set evil-command-line-map "C-k" nil))
