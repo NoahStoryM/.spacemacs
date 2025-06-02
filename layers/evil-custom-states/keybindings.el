@@ -195,3 +195,53 @@
   (dolist (evil-state-map
            (list evil-insert-state-map))
     (keymap-set evil-state-map (car p) (cdr p))))
+
+(with-eval-after-load 'company
+  (dolist (company-map
+           (list company-active-map
+                 company-search-map))
+    (keymap-set company-map "C-j" 'company-select-previous)
+    (keymap-set company-map "C-l" 'company-select-next)
+    (keymap-set company-map "C-k" 'company-complete-selection)))
+
+(with-eval-after-load 'helm
+  (add-hook 'spacemacs-editing-style-hook 'spacemacs//helm-ijkl-navigation)
+  (spacemacs//helm-ijkl-navigation dotspacemacs-editing-style))
+
+(with-eval-after-load 'ivy
+  (add-hook 'spacemacs-editing-style-hook 'spacemacs//ivy-ijkl-navigation)
+  (spacemacs//ivy-ijkl-navigation dotspacemacs-editing-style))
+
+(with-eval-after-load 'paredit
+  (keymap-set paredit-mode-map "C-d" nil)
+  (keymap-set paredit-mode-map "C-k" nil)
+  (keymap-set paredit-mode-map "M-k" nil)
+  (evil-define-key '(emacs hybrid insert) paredit-mode-map
+    (kbd "C-d") 'paredit-delete-char
+    (kbd "C-k") 'paredit-kill
+    (kbd "M-k") 'paredit-forward-kill-word)
+
+  (evil-define-key 'custom-normal enhanced-evil-paredit-mode-map
+    (kbd "P") nil
+    (kbd "p") nil
+    (kbd "c") nil
+    (kbd "y") nil
+    (kbd "D") nil
+    (kbd "C") nil
+    (kbd "S") nil
+    (kbd "Y") nil
+    (kbd "X") nil
+    (kbd "x") nil
+    (kbd "b") 'paredit-comment-dwim
+    (kbd "v") 'enhanced-evil-paredit-paste-after
+    (kbd "V") 'enhanced-evil-paredit-paste-before
+    (kbd "d") 'enhanced-evil-paredit-delete
+    (kbd "D") 'enhanced-evil-paredit-change
+    (kbd "C-e") 'paredit-raise-sexp
+    (kbd "C-f") 'enhanced-evil-paredit-delete-line)
+
+  (evil-define-key 'visual enhanced-evil-paredit-mode-map
+    (kbd "x") 'evil-delete-char
+    (kbd "X") 'evil-delete-backward-char
+    (kbd "c") 'enhanced-evil-paredit-yank
+    (kbd "C") 'enhanced-evil-paredit-yank-line))

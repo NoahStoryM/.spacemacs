@@ -51,52 +51,17 @@
   (spacemacs/set-leader-keys "a a" 'aidermacs-transient-menu))
 
 (progn ;; Org
-  (require 'evil-org)
-  (evil-define-key '(visual) 'evil-org-mode
-    (kbd "i e") nil
-    (kbd "i E") nil
-    (kbd "i r") nil
-    (kbd "i R") nil
-    (kbd "i")   'evil-previous-line
-    (kbd "h e") 'evil-org-inner-object
-    (kbd "h E") 'evil-org-inner-element
-    (kbd "h r") 'evil-org-inner-greater-element
-    (kbd "h R") 'evil-org-inner-subtree))
-
-(progn ;; Paredit
-  (require 'paredit)
-  (keymap-set paredit-mode-map "C-d" nil)
-  (keymap-set paredit-mode-map "C-k" nil)
-  (keymap-set paredit-mode-map "M-k" nil)
-  (evil-define-key '(emacs hybrid insert) paredit-mode-map
-    (kbd "C-d") 'paredit-delete-char
-    (kbd "C-k") 'paredit-kill
-    (kbd "M-k") 'paredit-forward-kill-word)
-
-  (evil-define-key 'custom-normal enhanced-evil-paredit-mode-map
-    (kbd "P") nil
-    (kbd "p") nil
-    (kbd "c") nil
-    (kbd "y") nil
-    (kbd "D") nil
-    (kbd "C") nil
-    (kbd "S") nil
-    (kbd "Y") nil
-    (kbd "X") nil
-    (kbd "x") nil
-    (kbd "b") 'paredit-comment-dwim
-    (kbd "v") 'enhanced-evil-paredit-paste-after
-    (kbd "V") 'enhanced-evil-paredit-paste-before
-    (kbd "d") 'enhanced-evil-paredit-delete
-    (kbd "D") 'enhanced-evil-paredit-change
-    (kbd "C-e") 'paredit-raise-sexp
-    (kbd "C-f") 'enhanced-evil-paredit-delete-line)
-
-  (evil-define-key 'visual enhanced-evil-paredit-mode-map
-    (kbd "x") 'evil-delete-char
-    (kbd "X") 'evil-delete-backward-char
-    (kbd "c") 'enhanced-evil-paredit-yank
-    (kbd "C") 'enhanced-evil-paredit-yank-line))
+  (with-eval-after-load 'evil-org
+    (evil-define-key '(visual) 'evil-org-mode
+      (kbd "i e") nil
+      (kbd "i E") nil
+      (kbd "i r") nil
+      (kbd "i R") nil
+      (kbd "i")   'evil-previous-line
+      (kbd "h e") 'evil-org-inner-object
+      (kbd "h E") 'evil-org-inner-element
+      (kbd "h r") 'evil-org-inner-greater-element
+      (kbd "h R") 'evil-org-inner-subtree)))
 
 (progn ;; Tab bar
   (dolist (i (number-sequence 1 9))
@@ -112,65 +77,58 @@
 (progn ;; Theme
   (spacemacs/set-leader-keys "T s" 'own/helm-themes))
 
-(progn ;; Ido
-  (require 'ido)
-  (keymap-set ido-common-completion-map "C-j" 'ido-next-match)
-  (keymap-set ido-common-completion-map "C-k" 'ido-prev-match)
-  (keymap-set ido-common-completion-map "C-l" 'ido-select-text))
-
 (progn ;; Input method
   (keymap-global-set "C-S-SPC" 'toggle-input-method)
   ;; (spacemacs/set-leader-keys "\\" 'scratch-buffer)
-  (require 'pyim)
-  (pyim-scheme-add
-   '(guobiao-shuangpin
-     :document "国标双拼方案"
-     :class shuangpin
-     :first-chars "abcdefghijklmnopqrstuvwxyz"
-     :rest-chars  "abcdefghijklmnopqrstuvwxyz"
-     :prefer-triggers nil
-     :cregexp-support-p t
-     :keymaps
-     (("a" "a" "a")
-      ("b" "b" "ei")
-      ("c" "c" "ao")
-      ("d" "d" "ian")
-      ("e" "e" "e")
-      ("f" "f" "an")
-      ("g" "g" "ang")
-      ("h" "h" "eng")
-      ("i" "ch" "i")
-      ("j" "j" "ing")
-      ("k" "k" "ai")
-      ("l" "l" "in" "er")
-      ("m" "m" "iao")
-      ("n" "n" "iang" "uang")
-      ("o" "o" "o" "uo")
-      ("p" "p" "ou")
-      ("q" "q" "ia" "ua")
-      ("r" "r" "en")
-      ("s" "s" "iong" "ong")
-      ("t" "t" "ie")
-      ("u" "sh" "u")
-      ("v" "zh" "v" "ui")
-      ("w" "w" "van" "uan")
-      ("x" "x" "ve" "ue")
-      ("y" "y" "iu" "uai")
-      ("z" "z" "vn" "un")
-      ("aa" "a")
-      ("ak" "ai")
-      ("af" "an")
-      ("ag" "ang")
-      ("ac" "ao")
-      ("ae" "e")
-      ("ab" "ei")
-      ("ar" "en")
-      ("ah" "eng")
-      ("al" "er")
-      ("ao" "o")
-      ("ap" "ou"))))
-  (pyim-default-scheme 'guobiao-shuangpin))
+  (with-eval-after-load 'pyim
+    (pyim-scheme-add
+     '(guobiao-shuangpin
+       :document "国标双拼方案"
+       :class shuangpin
+       :first-chars "abcdefghijklmnopqrstuvwxyz"
+       :rest-chars  "abcdefghijklmnopqrstuvwxyz"
+       :prefer-triggers nil
+       :cregexp-support-p t
+       :keymaps
+       (("a" "a" "a")
+        ("b" "b" "ei")
+        ("c" "c" "ao")
+        ("d" "d" "ian")
+        ("e" "e" "e")
+        ("f" "f" "an")
+        ("g" "g" "ang")
+        ("h" "h" "eng")
+        ("i" "ch" "i")
+        ("j" "j" "ing")
+        ("k" "k" "ai")
+        ("l" "l" "in" "er")
+        ("m" "m" "iao")
+        ("n" "n" "iang" "uang")
+        ("o" "o" "o" "uo")
+        ("p" "p" "ou")
+        ("q" "q" "ia" "ua")
+        ("r" "r" "en")
+        ("s" "s" "iong" "ong")
+        ("t" "t" "ie")
+        ("u" "sh" "u")
+        ("v" "zh" "v" "ui")
+        ("w" "w" "van" "uan")
+        ("x" "x" "ve" "ue")
+        ("y" "y" "iu" "uai")
+        ("z" "z" "vn" "un")
+        ("aa" "a")
+        ("ak" "ai")
+        ("af" "an")
+        ("ag" "ang")
+        ("ac" "ao")
+        ("ae" "e")
+        ("ab" "ei")
+        ("ar" "en")
+        ("ah" "eng")
+        ("al" "er")
+        ("ao" "o")
+        ("ap" "ou"))))
+    (pyim-default-scheme 'guobiao-shuangpin)))
 
 (progn ;; YASnippet
-  (keymap-global-set "<backtab>" 'company-yasnippet)
   (keymap-global-set "C-l" 'company-yasnippet))

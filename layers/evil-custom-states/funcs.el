@@ -94,3 +94,77 @@ The list of brackets to jump to is defined by `evil-custom-states/left-brackets'
     (when (looking-at regexp) (right-char 1))
     (re-search-forward regexp nil t count)
     (left-char 1)))
+
+;; Spacemacs ijkl
+(defcustom hybrid-style-enable-ijkl-bindings nil
+  "If non-nil then packages configuration should enable ijkl navigation."
+  :group 'spacemacs
+  :type 'boolean)
+
+(defun spacemacs//support-ijkl-navigation-p ()
+  "Returns non-nil if navigation keys should be evilified."
+  (or (eq dotspacemacs-editing-style 'vim)
+      (and (eq dotspacemacs-editing-style 'hybrid)
+           hybrid-style-enable-ijkl-bindings)))
+
+(defun spacemacs//ivy-ijkl-navigation (style)
+  "Set navigation on 'ijkl' for the given editing STYLE."
+  (cond
+   ((or (eq 'vim style)
+        (and (eq 'hybrid style)
+             hybrid-style-enable-ijkl-bindings))
+    (define-key ivy-minibuffer-map (kbd "C-h") 'nil)
+    (define-key ivy-minibuffer-map (kbd "C-S-h") help-map)
+    (dolist (map (list ivy-minibuffer-map
+                       ivy-switch-buffer-map
+                       ivy-reverse-i-search-map))
+      (define-key map (kbd "C-l") 'ivy-next-line)
+      (define-key map (kbd "C-j") 'ivy-previous-line))
+    (define-key ivy-minibuffer-map (kbd "H-i") (kbd "DEL"))
+    (define-key counsel-find-file-map (kbd "H-i") 'counsel-up-directory)
+    (define-key ivy-minibuffer-map (kbd "C-k") 'ivy-alt-done)
+    (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit))
+   (t
+    (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-alt-done)
+    (define-key ivy-minibuffer-map (kbd "C-k") 'ivy-kill-line)
+    (define-key ivy-minibuffer-map (kbd "C-h") nil)
+    (define-key ivy-minibuffer-map (kbd "C-l") nil))))
+
+(defun spacemacs//helm-ijkl-navigation (style)
+  "Set navigation on 'ijkl' for the given editing STYLE."
+  (cond
+   ((or (eq 'vim style)
+        (and (eq 'hybrid style)
+             hybrid-style-enable-ijkl-bindings))
+    (define-key helm-map (kbd "C-h") 'nil)
+    (define-key helm-map (kbd "C-S-h") 'describe-key)
+    (define-key helm-map (kbd "C-l") 'helm-next-line)
+    (define-key helm-map (kbd "C-j") 'helm-previous-line)
+    (define-key helm-map (kbd "C-S-l") 'helm-follow-action-forward)
+    (define-key helm-map (kbd "C-S-j") 'helm-follow-action-backward)
+    (define-key helm-map (kbd "C-k") (kbd "RET"))
+    (with-eval-after-load 'helm-files
+      (dolist (keymap (list helm-find-files-map helm-read-file-map))
+        (define-key keymap (kbd "C-h") 'nil)
+        (define-key keymap (kbd "C-S-h") 'describe-key)
+        (define-key keymap (kbd "C-l") 'nil)
+        (define-key keymap (kbd "C-k") 'helm-execute-persistent-action)
+        (define-key keymap (kbd "H-i") 'helm-find-files-up-one-level))))
+   (t
+    (define-key helm-map (kbd "C-j") 'helm-execute-persistent-action)
+    (define-key helm-map (kbd "C-k") 'helm-delete-minibuffer-contents)
+    (define-key helm-map (kbd "C-h") nil)
+    (define-key helm-map (kbd "C-l") 'helm-recenter-top-bottom-other-window))))
+
+(defun spacemacs//markdown-ijkl-promotion-demotion (style)
+  "Set promotion/demotiion on 'ijkl' for the given editing STYLE."
+  (when (or (eq 'vim style)
+            (and (eq 'hybrid style)
+                 hybrid-style-enable-ijkl-bindings))
+    (dolist (s '(normal insert))
+      (evil-define-key s markdown-mode-map
+        (kbd "M-h") 'nil
+        (kbd "M-j") 'markdown-promote
+        (kbd "M-k") 'markdown-move-down
+        (kbd "M-i") 'markdown-move-up
+        (kbd "M-l") 'markdown-demote))))
