@@ -17,6 +17,7 @@
   (global-prettify-symbols-mode t))
 
 (progn ;; Char width
+  (set-char-table-range char-width-table '(#x2190 . #x21FF) 1)
   (set-char-table-range char-width-table '(#x2200 . #x22FF) 1))
 
 (progn ;; Electric pair
