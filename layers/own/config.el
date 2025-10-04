@@ -58,7 +58,11 @@
    ;; '(octave-block-offset 4))
    '(indent-tabs-mode nil)
    '(comment-style 'multi-line))
-  (add-hook 'spacemacs-indent-sensitive-modes 'snippet-mode))
+  (add-hook 'spacemacs-indent-sensitive-modes 'snippet-mode)
+  (add-hook 'scheme-mode-hook
+            (lambda ()
+              (put 'case-λ 'scheme-indent-function
+                   (get 'case-lambda 'scheme-indent-function)))))
 
 (progn ;; Input method
   (setenv "XMODIFIERS"        "@im=fcitx")
