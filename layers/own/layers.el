@@ -15,7 +15,7 @@
    ;; ----------------------------------------------------------------
    ;; Programming Languages
    ;; ----------------------------------------------------------------
-   ;; agda
+   agda
    ;; clojure
    ;; common-lisp
    ;; coq
@@ -25,7 +25,7 @@
    emacs-lisp
    emoji
    ;; go
-   ;; haskell
+   haskell
    ;; idris
    ;; java
    javascript
@@ -35,10 +35,11 @@
    nixos
    ;; typescript
    ;; php
+   prolog
    python
    racket
    ;; ruby
-   ;; rust
+   rust
    (scheme :variables
            scheme-implementations '(chez guile))
    shell-scripts
@@ -46,6 +47,7 @@
    ;; solidity
    ;; sql
    vimscript
+   zig
 
    ;; ----------------------------------------------------------------
    ;; File formats

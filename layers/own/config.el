@@ -20,7 +20,9 @@
   (set-char-table-range char-width-table '#x00D7 1)
   (set-char-table-range char-width-table '#x00F7 1)
   (set-char-table-range char-width-table '(#x2190 . #x21FF) 1)
-  (set-char-table-range char-width-table '(#x2200 . #x22FF) 1))
+  (set-char-table-range char-width-table '(#x2200 . #x22FF) 1)
+  (set-char-table-range char-width-table '#x25CB 1)
+  (set-char-table-range char-width-table '#x25A1 1))
 
 (progn ;; Electric pair
   (custom-set-variables
