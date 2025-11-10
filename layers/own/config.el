@@ -19,6 +19,8 @@
 (progn ;; Char width
   (set-char-table-range char-width-table '#x00D7 1)
   (set-char-table-range char-width-table '#x00F7 1)
+  (set-char-table-range char-width-table '(#x0370 . #x03FF) 1)
+  (set-char-table-range char-width-table '(#x2070 . #x209F) 1)
   (set-char-table-range char-width-table '(#x2190 . #x21FF) 1)
   (set-char-table-range char-width-table '(#x2200 . #x22FF) 1)
   (set-char-table-range char-width-table '#x25CB 1)
