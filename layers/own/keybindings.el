@@ -37,12 +37,12 @@
   (keymap-global-set "M-f" 'forward-word)
   (keymap-global-set "M-b" 'backward-word)
   (keymap-global-set "M-d" 'kill-word)
-  (spacemacs/set-leader-keys "M-m" 'spacemacs/smex)
+  (spacemacs/set-leader-keys "M-m" 'spacemacs/amx)
   (spacemacs/set-leader-keys "b c" 'kill-buffer))
 
-(progn ;; EXWM
-  (keymap-global-set "C-q" 'exwm-input-release-keyboard)
-  (push ?\C-\\ exwm-input-prefix-keys))
+;; (progn ;; EXWM
+;;   (keymap-global-set "C-q" 'exwm-input-release-keyboard)
+;;   (push ?\C-\\ exwm-input-prefix-keys))
 
 (progn ;; Guix
   (spacemacs/set-leader-keys "g x" 'guix))

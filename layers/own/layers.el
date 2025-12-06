@@ -15,7 +15,7 @@
    ;; ----------------------------------------------------------------
    ;; Programming Languages
    ;; ----------------------------------------------------------------
-   agda
+   ;; agda
    ;; clojure
    ;; common-lisp
    ;; coq
@@ -25,17 +25,17 @@
    emacs-lisp
    emoji
    ;; go
-   haskell
+   ;; haskell
    ;; idris
    ;; java
    javascript
    latex
-   lua
+   ;; lua
    ;; major-modes
-   nixos
+   ;; nixos
    ;; typescript
    ;; php
-   prolog
+   ;; prolog
    python
    racket
    ;; ruby
@@ -72,11 +72,11 @@
    (chinese :variables
             chinese-enable-youdao-dict t)
    ;; eaf
-   (exwm :variables
-         exwm-enable-systray t
-         exwm-terminal-command "kitty"
-         exwm-xim-mode t
-         desktop-environment-mode t)
+   ;; (exwm :variables
+   ;;       exwm-enable-systray t
+   ;;       exwm-terminal-command "kitty"
+   ;;       exwm-xim-mode t
+   ;;       desktop-environment-mode t)
    (git :variables
         git-magit-status-fullscreen t
         magit-push-always-verify nil
@@ -105,7 +105,7 @@
           shell-default-position 'bottom
           shell-default-shell 'eshell)
    semantic
-   smex
+   amx
    spell-checking
    syntax-checking
    (templates :variables

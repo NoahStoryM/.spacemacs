@@ -11,6 +11,10 @@
 ;;; Code:
 
 ;; Theme
+(defun true-color-p ()
+  (or
+    (display-graphic-p)
+    (= (tty-display-color-cells) 16777216)))
 (defun spacemacs-theme-custom-colors (theme)
   (setopt
    spacemacs-theme-custom-colors
