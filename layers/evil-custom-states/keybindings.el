@@ -152,14 +152,14 @@
     (p
      `(
        ("<escape>" . evil-custom-normal-state)
-       ("H-i" . evil-previous-line)
-       ("C-j" . evil-backward-char)
-       ("C-k" . evil-next-line)
-       ("C-l" . evil-forward-char)
-       ("C-u" . evil-backward-word-begin)
-       ("C-o" . evil-forward-word-end)
-       ("C-U" . evil-backward-WORD-end)
-       ("C-O" . evil-forward-WORD-begin)
+       ;; ("H-i" . evil-previous-line)
+       ;; ("C-j" . evil-backward-char)
+       ;; ("C-k" . evil-next-line)
+       ;; ("C-l" . evil-forward-char)
+       ;; ("C-u" . evil-backward-word-begin)
+       ;; ("C-o" . evil-forward-word-end)
+       ;; ("C-U" . evil-backward-WORD-end)
+       ;; ("C-O" . evil-forward-WORD-begin)
 
        ;; ("C-h" . evil-first-non-blank)
        ;; ("C-;" . evil-end-of-line)
@@ -175,16 +175,16 @@
        ;; ("M-u" . evil-window-prev)
        ;; ("M-o" . evil-window-next)
 
-       ("C-e" . evil-replace)
-       ("C-s" . backward-delete-char)
-       ("C-d" . evil-delete)
-       ("C-f" . delete-char)
-       ("C-w" . backward-kill-word)
-       ("C-r" . kill-word)
+       ;; ("C-e" . evil-replace)
+       ;; ("C-s" . backward-delete-char)
+       ;; ("C-d" . evil-delete)
+       ;; ("C-f" . delete-char)
+       ;; ("C-w" . backward-kill-word)
+       ;; ("C-r" . kill-word)
 
-       ("C-q" . evil-open-above)
-       ("C-t" . evil-open-below)
-       ("C-a" . evil-custom-normal-state)
+       ;; ("C-q" . evil-open-above)
+       ;; ("C-t" . evil-open-below)
+       ;; ("C-a" . evil-custom-normal-state)
 
        ;; ("C-z" . comment-dwim)
        ;; ("C-x" . evil-undo)
@@ -229,7 +229,7 @@
   (keymap-set paredit-mode-map "C-k" nil)
   (keymap-set paredit-mode-map "M-k" nil)
   (evil-define-key '(emacs hybrid insert) paredit-mode-map
-    (kbd "C-f") 'paredit-delete-char)
+    (kbd "C-d") 'paredit-delete-char)
 
   (evil-define-key 'custom-normal enhanced-evil-paredit-mode-map
     (kbd "P") nil
