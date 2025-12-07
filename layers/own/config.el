@@ -32,6 +32,10 @@
    '(electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
   (electric-pair-mode t))
 
+(progn ;; Dired
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'dired-mode 'normal)))
+
 (let ;; Theme
     ((theme (when custom-enabled-themes (car custom-enabled-themes))))
   (when (or (eq theme 'spacemacs-dark) (eq theme 'spacemacs-light))
