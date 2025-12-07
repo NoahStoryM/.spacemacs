@@ -45,6 +45,8 @@
   '(
     aidermacs
     enhanced-evil-paredit
+    capf-autosuggest
+    eshell-syntax-highlighting
     frameshot
     guix
     on-parens
@@ -101,6 +103,18 @@ Each entry is either:
     (racket-mode      . paredit-mode)
     (racket-repl-mode . paredit-mode)
     (scheme-mode      . paredit-mode)))
+
+(defun own/init-capf-autosuggest ()
+  (use-package capf-autosuggest
+    :defer t
+    :ensure t
+    :hook (eshell-mode . capf-autosuggest-mode)))
+
+(defun own/init-eshell-syntax-highlighting ()
+  (use-package eshell-syntax-highlighting
+    :defer t
+    :ensure t
+    :hook (eshell-mode . eshell-syntax-highlighting-global-mode)))
 
 (defun own/init-frameshot ()
   (use-package frameshot
