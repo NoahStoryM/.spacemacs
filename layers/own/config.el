@@ -37,6 +37,19 @@
   (with-eval-after-load 'evil
     (evil-set-initial-state 'dired-mode 'normal)))
 
+(progn ;; Tramp
+  (with-eval-after-load 'tramp
+    (add-to-list 'tramp-connection-properties
+                 (list (regexp-quote "/ssh:vps:")
+                       "remote-shell" "/bin/sh"))
+    (add-to-list 'tramp-connection-properties
+                 (list (regexp-quote "/ssh:vps:")
+                       "remote-shell-login" '("-l" "/bin/sh")))
+    (setq tramp-connect-timeout 180)
+    (setq remote-file-name-inhibit-cache nil)
+    (setq tramp-verbose 1)
+    (setq tramp-chunksize 500)))
+
 (let ;; Theme
     ((theme (when custom-enabled-themes (car custom-enabled-themes))))
   (when (or (eq theme 'spacemacs-dark) (eq theme 'spacemacs-light))
