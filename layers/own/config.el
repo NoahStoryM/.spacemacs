@@ -12,6 +12,7 @@
 
 (progn ;; Basic
   (custom-set-variables '(evil-default-state 'custom-normal))
+  (add-to-list 'default-frame-alist '(undecorated . t))
   (delete-selection-mode t)
   (global-font-lock-mode t)
   (global-prettify-symbols-mode t))
