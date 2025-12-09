@@ -68,7 +68,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-install-packages 'used-but-keep-unused
 
    ;; Default major mode of the scratch buffer
-   dotspacemacs-scratch-mode 'markdown-mode
+   dotspacemacs-scratch-mode 'org-mode
    ))
 
 (defun dotspacemacs/init ()
