@@ -69,10 +69,9 @@
   (spacemacs/set-leader-keys "M-0" 'tab-bar-select-tab-by-name)
   (spacemacs/set-leader-keys "M--" 'tab-bar-close-tab)
   (spacemacs/set-leader-keys "M-=" 'tab-bar-new-tab)
-  (custom-set-variables '(tab-bar-select-tab-modifiers '(super)))
-  (keymap-global-set "s-0" 'tab-bar-select-tab-by-name)
-  (keymap-global-set "s--" 'tab-bar-close-tab)
-  (keymap-global-set "s-=" 'tab-bar-new-tab))
+  (spacemacs/set-leader-keys "M-u" 'tab-bar-switch-to-prev-tab)
+  (spacemacs/set-leader-keys "M-o" 'tab-bar-switch-to-next-tab)
+  (custom-set-variables '(tab-bar-select-tab-modifiers '(super))))
 
 (progn ;; Theme
   (spacemacs/set-leader-keys "T s" 'own/helm-themes))
