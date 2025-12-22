@@ -110,7 +110,10 @@
 
 (progn ;; Tab bar
   (custom-set-variables '(tab-bar-tab-hints t))
-  (tab-bar-mode t))
+  (setopt tab-bar-show 1))
+
+(progn ;; Tab line
+  (global-tab-line-mode))
 
 (progn ;; Treemacs
   (custom-set-variables '(treemacs-width 20)))
